@@ -46,7 +46,6 @@ void UBaseLobbyWidget::PressChatTextEnter(const FText& Text, ETextCommit::Type C
 	FText FormattedMessage = FText::Format(
 		FText::FromString(TEXT("{0} : {1}")),
 		FText::AsNumber(PC->PlayerState->GetPlayerId()),
-		//FText::FromString(PC->PlayerState->GetUniqueId().ToString()),
 		Text
 	);
 	switch (CommitMethod)
