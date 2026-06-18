@@ -46,7 +46,7 @@ void UBaseLobbyWidget::SetTimerTxt(int32 InTime)
 void UBaseLobbyWidget::SetUserCount(int32 InCount)
 {
 	FString Temp = FString::Printf(TEXT("%d 명"), InCount);
-	TimerTxt->SetText(FText::FromString(Temp));
+	UserCount->SetText(FText::FromString(Temp));
 }
 
 void UBaseLobbyWidget::ShowStartButton()

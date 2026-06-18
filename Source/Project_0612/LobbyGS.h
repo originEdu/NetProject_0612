@@ -15,8 +15,12 @@ class PROJECT_0612_API ALobbyGS : public AGameStateBase
 {
 	GENERATED_BODY()
 public:
+	ALobbyGS();
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Time", Replicated)
 	int32 LeftTime = 180;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UserCount", Replicated)
+	int32 CurrentPlayerCount = 0;
 
 	virtual void GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const override;
 	

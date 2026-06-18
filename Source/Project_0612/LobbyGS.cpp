@@ -6,11 +6,17 @@
 #include "LobbyPC.h"
 #include "BaseLobbyWidget.h"
 
+ALobbyGS::ALobbyGS()
+{
+	PrimaryActorTick.bCanEverTick = true;
+}
+
 void ALobbyGS::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
+	
 	DOREPLIFETIME(ALobbyGS, LeftTime);
+	DOREPLIFETIME(ALobbyGS, CurrentPlayerCount);
 }
 
 void ALobbyGS::Tick(float DeltaSeconds)
@@ -21,6 +27,6 @@ void ALobbyGS::Tick(float DeltaSeconds)
 	if (PC&& PC->IsLocalPlayerController() && PC->LobbyWidgetObject)
 	{
 		PC->LobbyWidgetObject->SetTimerTxt(LeftTime);
+		PC->LobbyWidgetObject->SetUserCount(CurrentPlayerCount);
 	}
-
 }
