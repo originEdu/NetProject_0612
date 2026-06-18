@@ -9,29 +9,16 @@
 #include "Kismet/GameplayStatics.h"
 #include "BaseLobbyWidget.h"
 
-void ALobbyGM::SetIncreaseUserCount(bool bIsIncrease)
-{
-	ALobbyGS* GS = GetGameState<ALobbyGS>();
-	if (GS)
-	{
-		if (bIsIncrease)
-		{
-			GS->CurrentPlayerCount++;
-		}
-		else
-		{
-			GS->CurrentPlayerCount--;
-		}
-	}
-}
-
-
 void ALobbyGM::OnPostLogin(AController* NewPlayer)
 {
 	Super::OnPostLogin(NewPlayer);
 	if (NewPlayer)
 	{
-		SetIncreaseUserCount(true);
+		ALobbyGS* GS = GetGameState<ALobbyGS>();
+		if (GS)
+		{
+			GS->CurrentPlayerCount = GetNumPlayers();
+		}
 	}
 }
 
@@ -43,8 +30,7 @@ void ALobbyGM::Logout(AController* Exiting)
 		ALobbyGS* GS = GetGameState<ALobbyGS>();
 		if (GS)
 		{
-			//GS->CurrentPlayerCount = GetNumPlayers();
-			SetIncreaseUserCount(false);
+			GS->CurrentPlayerCount = GetNumPlayers()-1;
 		}
 	}
 }

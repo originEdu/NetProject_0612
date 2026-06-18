@@ -21,6 +21,4 @@ public:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	FTimerHandle LeftTimerHandle;
-	
-	void SetIncreaseUserCount(bool bIsIncrease);
 };
