@@ -28,6 +28,12 @@ void UBaseLobbyWidget::PressStart()
 
 void UBaseLobbyWidget::PressSend()
 {
+	ALobbyPC* PC = Cast<ALobbyPC>(GetOwningPlayer());
+	if (PC)
+	{
+		PC->C2S_SendMessage(InputTxt->GetText());
+		InputTxt->SetText(FText::GetEmpty());
+	}
 }
 
 void UBaseLobbyWidget::PressChatTextEnter(const FText& Text, ETextCommit::Type CommitMethod)
@@ -40,7 +46,7 @@ void UBaseLobbyWidget::PressChatTextEnter(const FText& Text, ETextCommit::Type C
 	{
 	case ETextCommit::OnEnter:
 		PC->C2S_SendMessage(Text);
-		InputTxt->SetText(FText::FromString(TEXT("")));
+		InputTxt->SetText(FText::GetEmpty());
 		break;
 	}
 }

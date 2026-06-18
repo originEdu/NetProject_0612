@@ -58,8 +58,6 @@ void ALobbyGM::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	GetWorld()->GetTimerManager().ClearTimer(LeftTimerHandle);
 	Super::EndPlay(EndPlayReason);
-
-	
 }
 
 

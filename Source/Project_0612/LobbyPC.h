@@ -35,4 +35,8 @@ public:
 	void C2S_SendMessage(const FText& Message);
 	bool C2S_SendMessage_Validate(const FText& Message);
 	void C2S_SendMessage_Implementation(const FText& Message);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multi_BroadcastMessage(const FText& Message);
+	void Multi_BroadcastMessage_Implementation(const FText& Message);
 };
