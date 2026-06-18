@@ -1,12 +1,12 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Net/UnrealNetwork.h"
 #include "LobbyGS.h"
+#include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
 #include "LobbyPC.h"
+#include "BaseLobbyWidget.h"
 
-
-void ALobbyGS::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)
+void ALobbyGS::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
@@ -20,7 +20,7 @@ void ALobbyGS::Tick(float DeltaSeconds)
 	ALobbyPC* PC = Cast<ALobbyPC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if (PC&& PC->IsLocalPlayerController() && PC->LobbyWidgetObject)
 	{
-		//PC->LobbyWidgetObject->SetTimerTxt(LeftTime);
+		PC->LobbyWidgetObject->SetTimerTxt(LeftTime);
 	}
 
 }
