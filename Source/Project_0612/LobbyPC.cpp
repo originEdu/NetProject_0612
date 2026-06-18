@@ -4,6 +4,7 @@
 #include "LobbyPC.h"
 #include "BaseLobbyWidget.h"
 #include "Engine/World.h"
+#include "LobbyGS.h"
 
 void ALobbyPC::BeginPlay()
 {
@@ -51,11 +52,10 @@ bool ALobbyPC::C2S_SendMessage_Validate(const FText& Message)
 
 void ALobbyPC::C2S_SendMessage_Implementation(const FText& Message)
 {
-    Multi_BroadcastMessage(Message);
+    ALobbyGS* GS = GetWorld()->GetGameState<ALobbyGS>();
+    if (GS)
+    {
+        GS->Multi_BroadcastMessage(Message);
+    }
 }
 
-void ALobbyPC::Multi_BroadcastMessage_Implementation(const FText& Message)
-{
-    FString FinalLog = FString::Printf(TEXT("%s"), *Message.ToString());
-    UE_LOG(LogTemp, Log, TEXT("%s"), *FinalLog);
-}

@@ -46,6 +46,10 @@ void ALobbyGM::BeginPlay()
 			ALobbyGS* GS = GetGameState<ALobbyGS>();
 			if (GS)
 			{
+				if (GS->LeftTime == 0)
+				{
+					GetWorld()->GetTimerManager().ClearTimer(LeftTimerHandle);
+				}
 				GS->LeftTime--; //function();
 			}
 		},

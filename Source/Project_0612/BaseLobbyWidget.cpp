@@ -48,6 +48,9 @@ void UBaseLobbyWidget::PressChatTextEnter(const FText& Text, ETextCommit::Type C
 		PC->C2S_SendMessage(Text);
 		InputTxt->SetText(FText::GetEmpty());
 		break;
+	case ETextCommit::OnCleared:
+		InputTxt->SetUserFocus(PC);
+		break;
 	}
 }
 
@@ -71,4 +74,21 @@ void UBaseLobbyWidget::ShowStartButton()
 {
 	StartBtn->SetVisibility(ESlateVisibility::Visible);
 	PlayAnimation(ShowButtonAnim);
+}
+
+void UBaseLobbyWidget::AddMessage(const FText& InMessage)
+{
+	if (ChatBox)
+	{
+		UTextBlock* NewText = NewObject<UTextBlock>(ChatBox);
+		NewText->SetText(InMessage);
+
+		auto CurrentFont = NewText->GetFont();
+		CurrentFont.Size = 40;
+
+		NewText->SetFont(CurrentFont);
+
+		ChatBox->AddChild(NewText);
+		ChatBox->ScrollToEnd();
+	}
 }

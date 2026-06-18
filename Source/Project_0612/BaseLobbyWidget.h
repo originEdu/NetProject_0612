@@ -61,6 +61,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ShowStartButton();
 
+	UFUNCTION(BlueprintCallable)
+	void AddMessage(const FText& InMessage);
+
 	UPROPERTY(Transient,meta = (BindWidgetAnim))
 	TObjectPtr<UWidgetAnimation> ShowButtonAnim;
 };

@@ -30,3 +30,15 @@ void ALobbyGS::Tick(float DeltaSeconds)
 		PC->LobbyWidgetObject->SetUserCount(CurrentPlayerCount);
 	}
 }
+
+void ALobbyGS::Multi_BroadcastMessage_Implementation(const FText& Message)
+{
+	ALobbyPC* PC = Cast<ALobbyPC>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PC)
+	{
+		if (PC->LobbyWidgetObject)
+		{
+			PC->LobbyWidgetObject->AddMessage(Message);
+		}
+	}
+}
