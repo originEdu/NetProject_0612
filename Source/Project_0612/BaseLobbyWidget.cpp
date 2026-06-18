@@ -8,6 +8,8 @@
 #include "Components/ScrollBox.h"
 #include "Animation/WidgetAnimation.h"
 #include "LobbyPC.h"
+#include "LobbyPS.h"
+#include "GameFramework/PlayerState.h"
 
 void UBaseLobbyWidget::NativeOnInitialized()
 {
@@ -41,11 +43,16 @@ void UBaseLobbyWidget::PressChatTextEnter(const FText& Text, ETextCommit::Type C
 	ALobbyPC* PC = Cast<ALobbyPC>(GetOwningPlayer());
 	if (!PC) 
 		return;
-
+	FText FormattedMessage = FText::Format(
+		FText::FromString(TEXT("{0} : {1}")),
+		FText::AsNumber(PC->PlayerState->GetPlayerId()),
+		//FText::FromString(PC->PlayerState->GetUniqueId().ToString()),
+		Text
+	);
 	switch (CommitMethod)
 	{
 	case ETextCommit::OnEnter:
-		PC->C2S_SendMessage(Text);
+		PC->C2S_SendMessage(FormattedMessage);
 		InputTxt->SetText(FText::GetEmpty());
 		break;
 	case ETextCommit::OnCleared:
