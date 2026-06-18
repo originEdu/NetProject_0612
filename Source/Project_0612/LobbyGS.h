@@ -22,6 +22,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UserCount", Replicated)
 	int32 CurrentPlayerCount = 0;
 
+
 	virtual void GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const override;
 	
 	virtual void Tick(float DeltaSeconds) override;

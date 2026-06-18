@@ -3,6 +3,7 @@
 
 #include "LobbyPC.h"
 #include "BaseLobbyWidget.h"
+#include "Engine/World.h"
 
 void ALobbyPC::BeginPlay()
 {
@@ -28,4 +29,26 @@ void ALobbyPC::BeginPlay()
             }
         }
 	}
+}
+
+void ALobbyPC::Kick()
+{
+    if (HasAuthority())
+    {
+        S2C_Kick();
+    }
+}
+
+void ALobbyPC::S2C_Kick_Implementation()
+{
+    GEngine->HandleDisconnect(GetWorld() , GetWorld()->GetNetDriver());
+}
+
+bool ALobbyPC::C2S_SendMessage_Validate(const FText& Message)
+{
+    return true;
+}
+
+void ALobbyPC::C2S_SendMessage_Implementation(const FText& Message)
+{
 }

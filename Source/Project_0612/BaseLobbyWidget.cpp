@@ -7,6 +7,7 @@
 #include "Components/EditableTextBox.h"
 #include "Components/ScrollBox.h"
 #include "Animation/WidgetAnimation.h"
+#include "LobbyPC.h"
 
 void UBaseLobbyWidget::NativeOnInitialized()
 {
@@ -31,6 +32,17 @@ void UBaseLobbyWidget::PressSend()
 
 void UBaseLobbyWidget::PressChatTextEnter(const FText& Text, ETextCommit::Type CommitMethod)
 {
+	ALobbyPC* PC = Cast<ALobbyPC>(GetOwningPlayer());
+	if (!PC) 
+		return;
+
+	switch (CommitMethod)
+	{
+	case ETextCommit::OnEnter:
+		PC->C2S_SendMessage(Text);
+		InputTxt->SetText(FText::FromString(TEXT("")));
+		break;
+	}
 }
 
 void UBaseLobbyWidget::ProcessTextChange(const FText& Text)

@@ -8,6 +8,7 @@
 #include "LobbyPC.h"
 #include "Kismet/GameplayStatics.h"
 #include "BaseLobbyWidget.h"
+#include "GameFramework/GameSession.h"
 
 void ALobbyGM::OnPostLogin(AController* NewPlayer)
 {
@@ -57,6 +58,9 @@ void ALobbyGM::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	GetWorld()->GetTimerManager().ClearTimer(LeftTimerHandle);
 	Super::EndPlay(EndPlayReason);
+
+	
 }
+
 
 
